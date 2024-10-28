@@ -1,3 +1,5 @@
 fastapi
 gevent
 gunicorn[gevent]
+gunicorn[uvicorn]
+uvicorn
