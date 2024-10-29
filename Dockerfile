@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get --no-install-recommends -y install \
         ca-certificates gcc libssl-dev \
         python3 python3-dev python3-pip python3-venv \
-        vim && \
+        curl iputils-ping net-tools tcpdump telnet traceroute vim wget && \
     rm -rf /var/lib/apt/lists/*
 
 ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt

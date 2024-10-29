@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t swamibot:dev .
+docker build -t docker.io/library/swamibot:dev .

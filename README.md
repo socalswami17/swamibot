@@ -28,7 +28,7 @@ $ ./build.sh
 ### Deploy
 
 ```bash
-$ kind load docker-image swamibot:dev
+$ kind load docker-image docker.io/library/swamibot:dev
 
 $ helm upgrade --install swamibot ./swamibot
 
@@ -38,4 +38,13 @@ $ k port-forward pod/<pod-name> 8000:8000
 $ curl http://localhost:8000/
 {"Hello":"World"}%
 
+$ curl 'http://localhost:8000/items/123?q=hello%20world'
+{"item_id":123,"q":"hello world"}%
+
+$ k exec -it pod/<pod-name> -- /bin/bash
+swamibot@<pod-name>:~$ curl http://swamibot:8000/
+{"Hello":"World"}
+
+swamibot@<pod-name>:~$ curl 'http://swamibot:8000/items/123?q=hello%20world'
+{"item_id":123,"q":"hello world"}
 ```
