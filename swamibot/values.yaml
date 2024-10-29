@@ -51,10 +51,11 @@ securityContext: {}
 
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
+  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  port: 443
+  targetPort: 8443
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: ClusterIP
-  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
-  port: 8000
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
@@ -68,10 +69,10 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: swamibot-tls
+      hosts:
+        - swamibot.local
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -87,13 +88,23 @@ resources: {}
 
 # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 livenessProbe:
-  httpGet:
-    path: /
-    port: http
+  exec:
+    command:
+      - "true"
+  initialDelaySeconds: 1
+  periodSeconds: 999
+  #httpGet:
+  #  path: /
+  #  port: http
 readinessProbe:
-  httpGet:
-    path: /
-    port: http
+  exec:
+    command:
+      - "true"
+  initialDelaySeconds: 1
+  periodSeconds: 999
+  #httpGet:
+  #  path: /
+  #  port: http
 
 # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
 autoscaling:
@@ -104,17 +115,16 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+ - name: swamibot-certs
+   secret:
+     secretName: swamibot-certs
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+ - name: swamibot-certs
+   mountPath: "/var/run/tls"
+   readOnly: true
 
 nodeSelector: {}
 
