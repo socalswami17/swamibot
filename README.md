@@ -28,5 +28,14 @@ $ ./build.sh
 ### Deploy
 
 ```bash
+$ kind load docker-image swamibot:dev
+
 $ helm upgrade --install swamibot ./swamibot
+
+$ k get pods -l=app.kubernetes.io/instance=swamibot
+$ k port-forward pod/<pod-name> 8000:8000
+
+$ curl http://localhost:8000/
+{"Hello":"World"}%
+
 ```
