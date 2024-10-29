@@ -1,10 +1,24 @@
 ## swamibot
 
+### Vision
 a slack bot that responds to slash commands:
 * written in python fastapi,
 * running on gunicorn/gevent,
 * in a container deployed from helm/argocd,
 * to azure kubernetes
+
+### Current Status
+* a hello world python api in fastapi,
+* running on gunicorn/uvicorn,
+* in a container deployed from helm/argocd,
+* to kind locally
+
+### Roadmap
+1. get a public domain, and a trusted tls certificate
+2. deploy to azure kubernetes, verify the ingress
+3. implement the python slack bot endpoints
+4. write unit tests in tox/pytest
+5. write the argocd application yaml
 
 ## Installation
 
@@ -16,12 +30,14 @@ a slack bot that responds to slash commands:
 
 ### Build
 
+To build the image:
 ```bash
 $ ./build.sh
 ```
 
 ### Deploy
 
+To deploy the app:
 ```bash
 $ kind load docker-image docker.io/library/swamibot:dev
 
