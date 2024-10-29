@@ -13,11 +13,6 @@ a slack bot that responds to slash commands:
 * docker runtime, cli
 * helm
 * kubernetes (e.g. kind)
-* docker local registry
-
-```bash
-$ docker run -d -p 5050:5000 --restart=always --name registry registry:2
-```
 
 ### Build
 
