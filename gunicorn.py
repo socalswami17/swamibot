@@ -1,4 +1,9 @@
-bind = "0.0.0.0:8443"
+import os
+
+
+API_PORT_TLS = os.environ['API_PORT_TLS']
+
+bind = f"0.0.0.0:{API_PORT_TLS}"
 ca_certs = '/var/run/tls/ca.crt'
 certfile = '/var/run/tls/tls.crt'
 #check_config = True
@@ -8,7 +13,7 @@ reload = True
 worker_class = 'uvicorn.workers.UvicornWorker'
 #worker_class = 'gevent'
 workers = 3
-wsgi_app = "src.main:app"
+wsgi_app = "src.fastapi:app"
 
 def ssl_context(conf, default_ssl_context_factory):
     import ssl

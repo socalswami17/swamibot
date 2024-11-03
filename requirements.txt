@@ -1,5 +1,4 @@
-fastapi
-gevent
-gunicorn[gevent]
-gunicorn[uvicorn]
-uvicorn
+fastapi==0.*
+gunicorn==23.*
+slack_bolt==1.*
+uvicorn==0.*

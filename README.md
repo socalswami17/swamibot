@@ -2,26 +2,22 @@
 
 ### Vision
 a slack bot that responds to slash commands:
-* written in python fastapi,
-* running on gunicorn/gevent,
+* written with slack python bolt http client,
 * in a container deployed from helm/argocd,
 * to azure or google kubernetes
 
 ### Current Status
-* a hello world fastapi app,
-* running on gunicorn/uvicorn,
-* offering a human-requested tls cert,
+* a hello world slack python bolt app,
 * in a container deployed from helm,
 * to kind locally
 
 ### Roadmap
-1. get a public domain, and a trusted tls certificate
-2. deploy to azure kubernetes, verify the ingress
-3. implement the python slack bot endpoints using bolt
-4. write tox/pytest unit tests
-5. add a /prom endpoint, and a servicemonitor
-6. write the argocd application spec
-7. issue #1: support multicloud 
+1. implement the python slack bot endpoints
+1. write tox/pytest unit tests
+1. add a /prom endpoint, and a servicemonitor
+1. deploy to azure kubernetes, verify the ingress
+1. write the argocd application spec
+1. issue #1: support multicloud 
 
 ## Installation
 

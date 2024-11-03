@@ -20,7 +20,7 @@ USER swamibot
 ENV APP_HOME=/home/swamibot
 WORKDIR $APP_HOME
 
-COPY package.json requirements.txt start.sh swamibot.py $APP_HOME/
+COPY package.json requirements.txt start.sh gunicorn.py $APP_HOME/
 COPY src/ $APP_HOME/src/
 
 RUN python3 -m venv ${APP_HOME}/venv && \

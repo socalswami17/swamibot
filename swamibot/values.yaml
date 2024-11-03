@@ -116,15 +116,21 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes:
- - name: swamibot-certs
-   secret:
-     secretName: swamibot-certs
+  - name: swamibot-certs
+    secret:
+      secretName: swamibot-certs
+  - name: swamibot-slack
+    secret:
+      secretName: swamibot-slack
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
- - name: swamibot-certs
-   mountPath: "/var/run/tls"
-   readOnly: true
+  - name: swamibot-certs
+    mountPath: "/var/run/tls"
+    readOnly: true
+  - name: swamibot-slack
+    mountPath: "/home/swamibot/src/dynamic"
+    readOnly: true
 
 nodeSelector: {}
 
