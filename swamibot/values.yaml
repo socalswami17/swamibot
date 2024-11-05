@@ -7,9 +7,9 @@ replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: docker.io/library/swamibot
+  repository: "kslacr724760.azurecr.io/swamibot"
   # This sets the pull policy for images.
-  pullPolicy: Never
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "dev"
 
@@ -65,14 +65,14 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: swamibot.local
+    - host: swamibot.socalswami17.io
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
     - secretName: swamibot-tls
       hosts:
-        - swamibot.local
+        - swamibot.socalswami17.io
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

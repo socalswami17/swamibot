@@ -13,7 +13,7 @@ reload = True
 worker_class = 'uvicorn.workers.UvicornWorker'
 #worker_class = 'gevent'
 workers = 3
-wsgi_app = "src.fastapi:app"
+wsgi_app = "src.fastapi:api"
 
 def ssl_context(conf, default_ssl_context_factory):
     import ssl

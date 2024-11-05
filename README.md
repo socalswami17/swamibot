@@ -7,15 +7,17 @@ a slack bot that responds to slash commands:
 * to azure or google kubernetes
 
 ### Current Status
-* a hello world slack python bolt app,
+* a hello world slack python bolt app
+* (gunicorn/fastapi, tls),
 * in a container deployed from helm,
-* to kind locally
+* to aks/acr
 
 ### Roadmap
-1. implement the python slack bot endpoints
+1. add azure ingress ([custom dns and ssl](https://learn.microsoft.com/en-us/azure/aks/app-routing-dns-ssl))
+1. install the slack app in my workspace
+1. implement the bot endpoints
 1. write tox/pytest unit tests
 1. add a /prom endpoint, and a servicemonitor
-1. deploy to azure kubernetes, verify the ingress
 1. write the argocd application spec
 1. issue #1: support multicloud 
 
@@ -37,27 +39,18 @@ $ ./build.sh
 
 ### Deploy
 
-To deploy the app:
+To deploy the app to aks:
 ```bash
-$ kind load docker-image docker.io/library/swamibot:dev
+$ kubectl config get-contexts
+$ kubectl config use-context <aks-cluster-context>
 
 $ helm upgrade --install swamibot ./swamibot
 
-$ k get pods -l=app.kubernetes.io/instance=swamibot
-$ k port-forward pod/<pod-name> 8000:8000
+$ kubectl get pods -l=app.kubernetes.io/instance=swamibot -w
+$ kubectl port-forward pod/<pod-name> 8443:8443
 
-$ curl http://localhost:8000/
-{"Hello":"World"}%
-
-$ curl 'http://localhost:8000/items/123?q=hello%20world'
-{"item_id":123,"q":"hello world"}%
-
-$ k exec -it pod/<pod-name> -- /bin/bash
-swamibot@<pod-name>:~$ curl http://swamibot:8000/
-{"Hello":"World"}
-
-swamibot@<pod-name>:~$ curl 'http://swamibot:8000/items/123?q=hello%20world'
-{"item_id":123,"q":"hello world"}
+$ curl -k https://localhost:8443/slack/events
+{"detail":"Method Not Allowed"}%
 ```
 
 ### Debug

@@ -33,6 +33,7 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          command: ["sleep", "infinity"]
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -41,6 +42,9 @@ spec:
           env:
             - name: API_PORT_TLS
               value: "{{ .Values.service.targetPort }}"
+          envFrom:
+            - secretRef:
+                name: swamibot-slack
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
