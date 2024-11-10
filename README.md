@@ -3,17 +3,17 @@
 ### Vision
 a slack bot that responds to slash commands:
 * written with slack python bolt http client,
+* running on gunicorn/fastapi,
 * in a container deployed from helm/argocd,
-* to azure or google kubernetes
+* to azure or google kubernetes,
+* with dns and tls ingress
 
 ### Current Status
-* a hello world slack python bolt app
-* (gunicorn/fastapi, tls),
+* a hello world slack socket-mode python app
 * in a container deployed from helm,
 * to aks/acr
 
 ### Roadmap
-1. add azure ingress ([custom dns and ssl](https://learn.microsoft.com/en-us/azure/aks/app-routing-dns-ssl))
 1. install the slack app in my workspace
 1. implement the bot endpoints
 1. write tox/pytest unit tests
